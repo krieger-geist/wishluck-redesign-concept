@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { usePageTitle } from '../usePageTitle'
 
-// Findings come from one visit to the public site on 14 Nov 2026 (desktop and a 375px phone view).
+// Findings come from visits to the public site on 14 Nov 2026 (desktop, a 375px phone view, and a second,
+// slower pass that let third-party widgets load, including the cart and the start of checkout).
 // Observations can change as the live site changes. No statistics are invented here:
 // where an effect is described, it is the expected direction, not a measured number.
 
@@ -17,14 +18,14 @@ interface Change {
 const CHANGES: Change[] = [
   {
     area: 'Order tracking', effectType: 'Operations',
-    found: 'The Order Tracking page told visitors to enter their tracking details, but no tracking form appeared on the page during my visit.',
-    change: 'A working tracker by order ID and last 4 phone digits, with a step-by-step timeline and an example of the automatic WhatsApp update for each step.',
-    effect: '"Where is my order?" is usually the most common support question for online stores. Answering it on the site should cut those messages and the time staff spend looking up couriers.',
+    found: 'Tracking exists: a floating "Track" button opens a box that asks for the courier AWB number. The Order Tracking page itself only has text, and parents often remember their order number or phone, not the AWB.',
+    change: 'Track by order number and last 4 phone digits, on the page itself and inside the assistant, with a step-by-step timeline and the automatic WhatsApp update for each step.',
+    effect: 'Fewer "where is my order?" messages from parents who cannot find their AWB number, and less time spent looking orders up for them.',
     demo: { label: 'Try tracking', to: '/help#track' },
   },
   {
     area: 'Replacements', effectType: 'Operations',
-    found: 'The 7-day replacement promise is shown on the home and product pages, but I could not find a way to start a request on the site.',
+    found: 'The 7-day replacement promise is shown on the home and product pages, but there is no way to start a request on the site. When I asked the AI assistant about a broken toy, it replied that chat cannot start a return or exchange yet and gave the support email.',
     change: 'A replacement wizard that checks the 7-day window instantly, asks for a photo, and approves clear cases automatically. Cases outside the rules go to a person with the order attached.',
     effect: 'Fewer back-and-forth messages per request, and parents get an answer straight away instead of waiting for a reply.',
     demo: { label: 'Try a replacement', to: '/help#replace' },
@@ -45,26 +46,26 @@ const CHANGES: Change[] = [
   },
   {
     area: 'Pricing clarity', effectType: 'Trust',
-    found: 'Product pages show two prices close together, for example a main price and a lower "online" price, and the home banner adds a separate prepaid discount. It takes a moment to work out what you will actually pay.',
-    change: 'One price on the card. The prepaid saving is explained in one line and applied in a cart that shows subtotal, saving, delivery and total.',
-    effect: 'Clear totals reduce surprise at checkout, a common reason people abandon carts.',
+    found: 'The cart is already strong: a progress bar toward tiered discounts, a free worksheet, a combo upsell, and the prepaid price on the Checkout button. Earlier, on the product page, the main price and a lower "online" price sit close together, which takes a moment to read.',
+    change: 'A small one: one price on the product card, with the prepaid saving explained in one line underneath. The cart ideas are kept as they are.',
+    effect: 'A clearer first impression of the price, before the cart explains the rest.',
   },
   {
     area: 'Cash on delivery', effectType: 'Operations',
-    found: 'Cash on delivery is an important payment option for Indian shoppers, and unconfirmed COD orders are a known cause of parcels being refused at the door.',
-    change: 'A rule that sends a one-tap WhatsApp confirmation for COD orders and holds dispatch until the buyer confirms.',
+    found: 'Checkout uses GoKwik (mobile number and OTP, coupons). Its COD tools may already cover this, which I cannot see from outside. Unconfirmed COD orders are a known cause of parcels refused at the door.',
+    change: 'If not already in place: a rule that sends a one-tap WhatsApp confirmation for COD orders and holds dispatch until the buyer confirms.',
     effect: 'Fewer return-to-origin parcels, which saves shipping both ways and packing time.',
     demo: { label: 'See the rule', to: '/dashboard' },
   },
   {
-    area: 'Help and FAQ', effectType: 'Operations',
-    found: 'FAQs sit at the bottom of the home page as a short list. The footer links to a WhatsApp channel (a broadcast feed), and I could not find a contact page, email or phone number in the header or footer.',
-    change: 'A help centre with searchable FAQ, and a Help assistant on every page that answers common questions instantly. When it cannot help, it drafts a ticket with the question and page, so nobody has to repeat themselves.',
-    effect: 'Routine questions are answered without staff, and the ones that reach a person arrive with context.',
+    area: 'Support inside the assistant', effectType: 'Operations',
+    found: 'The site already has an AI shopping assistant (Jify by GoKwik) for bestsellers, picks and product questions. It sends support requests elsewhere: for a broken toy it pointed to care@wishluck.in, an email that is not shown in the header or footer.',
+    change: 'Extend the assistant from shopping into support actions: track an order, start a replacement, and when it cannot help, hand over a ticket with the question and page already filled in. A help centre page with a searchable FAQ backs it up.',
+    effect: 'The assistant finishes common support tasks itself instead of sending parents to email, and the cases that reach a person arrive with context.',
   },
   {
     area: 'Sold-out products', effectType: 'Conversion',
-    found: 'The catalogue includes an "Out of stock" filter, so sold-out items exist, but there is no visible way to be told when they return.',
+    found: 'A few products are sold out (4 of about 100 when I checked). Their pages show only a disabled "Sold out" button, with no way to be told when they return.',
     change: '"Notify me when it is back" on sold-out items, with alerts sent automatically on restock. The dashboard shows the waitlist next to reorder suggestions.',
     effect: 'Keeps demand that would otherwise leave, and gives purchasing a signal of what to restock first.',
   },
@@ -103,10 +104,10 @@ export default function Changes() {
       <h1 className="page-title">What I changed and why</h1>
       <p className="lead narrow-text">
         I looked through the public website on 14 November 2026 on a laptop and a phone-sized screen, as a parent would. Below is what I noticed,
-        what this concept does differently, and the effect I would expect. These are honest observations from one visit, not an audit by the team,
+        what this concept does differently, and the effect I would expect. These are honest observations from the public pages, the cart and the start of checkout (I did not place an order), not an audit by the team,
         and some may already be known or planned. I have not invented any statistics: effects are described as the expected direction only.
       </p>
-      <p className="muted narrow-text">What already works well and is kept: shopping by age, toys or books as two clear paths, a real product page with modes, how-to and safety notes, the 7-day replacement promise, and occasion-based gifting.</p>
+      <p className="muted narrow-text">What already works well and is kept: shopping by age, toys or books as two clear paths, detailed product pages, an AI shopping assistant, AWB tracking, a cart with tiered discounts and combo upsells, a fast GoKwik checkout with coupons, the 7-day replacement promise, and occasion-based gifting. The ideas below build on these rather than replace them.</p>
 
       <ul className="legend" aria-label="Effect types">
         <li><span className="pill pill-soft">Reach</span> more people find and can use the site</li>

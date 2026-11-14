@@ -10,24 +10,29 @@ viewport. Observations only; the live site may change. Numbers are what my brows
 - Information structure: Best Seller, All Products, Toys by Age (0-1, 1-3, 3-4, 4-5, 5-6, 6+), Gifting, New Arrivals,
   Bundles, Blog; footer has policies, order tracking and social links.
 
+## Checkout
+
+GoKwik one-click checkout in a popup: order summary, coupon field ("2 coupons available"), then login with mobile number and OTP before address and payment methods appear. I stopped at the mobile number step and did not enter any details or place an order, so the payment methods themselves were not seen.
+
 ## What already works
 
 - Shop by age, and "Toys or Books" as two clear paths.
 - Product pages are detailed: modes, how to use, what is in the box, safety notes, FAQ.
 - Clear promises: pan-India delivery, 7-day replacement, prepaid discount.
+- AI shopping assistant, AWB tracking widget, a cart with tiered discounts and upsells, and a fast GoKwik checkout.
 
 ## Issues noticed
 
 | Area | Observation |
 | --- | --- |
-| Order tracking | `/pages/order-tracking` says to enter tracking details, but no form appeared during my visit. |
-| Replacements | 7-day replacement is promised, but I found no way to start a request on the site. |
+| Order tracking | Corrected on a second pass: tracking exists as a floating "Track" widget that asks for the courier AWB number (it loads late, which is why my first pass missed it). The tracking page body itself has only text. |
+| Replacements | 7-day replacement is promised, but there is no way to start a request on the site. Asked about a broken toy, the AI assistant said chat cannot start a return or exchange yet and gave care@wishluck.in. |
 | Age navigation | Home "Shop by Age" shows 4 bands (0-1, 3-4, 5-6, 6+); the menu has 6. "Toys By Age" menu item links to `#`. |
 | Catalogue filters | Only availability and price. No filter for age, skill, type or occasion. |
 | Gifting | One flat list; the same product appeared twice; page title mentions budgets that cannot be filtered. |
-| Pricing | Main price plus a lower "online" price plus a separate prepaid banner discount. |
-| Contact | Footer links to a WhatsApp channel (broadcast). No contact page, email or phone found in header or footer. |
-| Sold out | "Out of stock" filter exists; no back-in-stock alert. |
+| Pricing | Product page shows a main price and a lower "online" price close together. The cart is strong: tiered discount progress bar (above Rs.899 / 1,699 / 2,499), free worksheet, combo upsell, prepaid price on the Checkout button. |
+| Contact and help | Has Jify, an AI shopping assistant by GoKwik (bestsellers, top picks, free-text questions; "Help me choose" marked coming soon). It sends support requests to care@wishluck.in, which is not shown in header or footer. Footer links to a WhatsApp channel (broadcast). |
+| Sold out | 4 of about 100 products sold out when checked; their pages show only a disabled "Sold out" button, no back-in-stock alert. |
 | Performance | Home: about 467 requests, about 2.6 MB transferred, 168 script tags, about 12 third-party script hosts, load event about 8.6 s. |
 | Accessibility | About 24 links or buttons without an accessible name; the only H1 on the home page is the logo text; continuously scrolling trust strip; an autoplay element. Skip link is present (good). |
 | Mobile | Catalogue H1 takes about half the first screen; a floating button overlaps product card corners. |

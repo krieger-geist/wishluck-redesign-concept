@@ -97,16 +97,16 @@ export default function Home() {
           <div>
             <p className="eyebrow">Inside this concept</p>
             <h2 id="auto-h">Less waiting for parents, less manual work for the team</h2>
-            <p>Most support messages in online toy stores are about the same few things: where is my order, something is broken, which toy fits my child. This concept answers those on the site, and shows the behind-the-scenes rules that would handle the rest.</p>
+            <p>The current site already has an AI shopping assistant, AWB tracking and a fast checkout. This concept builds on them: the assistant also handles support tasks, so "where is my order" and "my toy arrived broken" get solved on the site instead of by email, and a dashboard shows the rules that would handle the rest.</p>
             <div className="hero-ctas">
               <Link className="btn btn-primary" to="/dashboard">See the automation dashboard</Link>
               <Link className="btn btn-outline" to="/changes">What I changed and why</Link>
             </div>
           </div>
           <ul className="feature-list">
-            <li><strong>Self-serve tracking</strong> with WhatsApp updates at every step</li>
+            <li><strong>Track by order number</strong>, no AWB needed, with WhatsApp updates</li>
             <li><strong>Replacement wizard</strong> that checks the 7-day window instantly</li>
-            <li><strong>FAQ assistant</strong> that hands off to a person with a ready summary</li>
+            <li><strong>Assistant that does support</strong> and hands off with a ready summary</li>
             <li><strong>COD confirmation</strong> before dispatch to reduce refused parcels</li>
             <li><strong>Back-in-stock alerts</strong> instead of dead-end sold-out pages</li>
           </ul>

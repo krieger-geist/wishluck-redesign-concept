@@ -11,7 +11,7 @@ export interface FaqItem {
 export const faqs: FaqItem[] = [
   {
     id: 'track', q: 'Where is my order?',
-    a: 'Enter your order ID on the Track order page to see every step, from packing to delivery. In a live version, you would also get each update on WhatsApp automatically.',
+    a: 'Send your order number and the last 4 digits of your phone right here, like "DEMO1001 1234", and I will tell you where it is. No courier AWB number needed. In a live version, each update also arrives on WhatsApp automatically.',
     keywords: ['where', 'track', 'order', 'status', 'shipped', 'delivery', 'courier', 'awb', 'late'],
     action: { label: 'Track my order', to: '/help#track' },
   },

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { faqs, matchFaq, type FaqItem } from '../data/support'
+import { ORDER_STEPS, demoOrders, faqs, matchFaq, type FaqItem } from '../data/support'
 
 interface Msg { from: 'bot' | 'me'; text: string; faq?: FaqItem; handoff?: boolean }
 
@@ -11,7 +11,7 @@ export default function Assistant() {
   const [input, setInput] = useState('')
   const [misses, setMisses] = useState(0)
   const [msgs, setMsgs] = useState<Msg[]>([
-    { from: 'bot', text: 'Hi! I answer common questions instantly. Try one below or type your own. (Demo: answers come from a fixed FAQ, nothing is sent anywhere.)' },
+    { from: 'bot', text: 'Hi! Besides shopping help, I can track an order or start a replacement for you. Try one below or type your own. (Demo: answers come from a fixed FAQ, nothing is sent anywhere.)' },
   ])
   const logRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -29,8 +29,26 @@ export default function Assistant() {
   function ask(text: string) {
     const clean = text.trim()
     if (!clean) return
-    const hit = matchFaq(clean)
     const next: Msg[] = [{ from: 'me', text: clean }]
+    // Order lookup right in the chat: "DEMO1001 1234" (order number plus last 4 phone digits).
+    const orderId = clean.match(/\bDEMO\d{4}\b/i)?.[0].toUpperCase()
+    if (orderId) {
+      const last4 = clean.replace(/DEMO\d{4}/i, '').match(/\b\d{4}\b/)?.[0]
+      const o = demoOrders.find((x) => x.id === orderId)
+      let reply: string
+      if (!o) reply = `I could not find ${orderId}. Demo orders are DEMO1001 to DEMO1004.`
+      else if (!last4) reply = `Found ${orderId}. To keep it private, please send it again with the last 4 digits of your phone, like "${orderId} 0000". (Demo digits are listed on the Help page.)`
+      else if (last4 !== o.phoneLast4) reply = 'Those phone digits do not match this order. Please check and try again.'
+      else reply = o.step === 5
+        ? `${o.item} was delivered ${o.deliveredDaysAgo} days ago in ${o.city}. ${(o.deliveredDaysAgo ?? 99) <= 7 ? 'If anything is wrong, you can still request a replacement.' : 'The 7-day replacement window has closed, but a person can still help.'}`
+        : `${o.item} is ${ORDER_STEPS[o.step].toLowerCase()} and expected ${o.eta.toLowerCase()} in ${o.city}.`
+      next.push({ from: 'bot', text: reply, faq: o && last4 === o.phoneLast4 && o.step === 5 ? faqs.find((f) => f.id === 'replace') : undefined })
+      setMsgs((m) => [...m, ...next])
+      setInput('')
+      setMisses(0)
+      return
+    }
+    const hit = matchFaq(clean)
     if (hit) {
       next.push({ from: 'bot', text: hit.a, faq: hit })
       setMisses(0)
