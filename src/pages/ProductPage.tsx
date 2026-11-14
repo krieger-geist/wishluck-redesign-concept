@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import { ageLabel, discountPct, findProduct, formatINR, products } from '../data/products'
@@ -14,6 +14,16 @@ export default function ProductPage() {
   const { add, alerts, toggleAlert, notify } = useStore()
   const [pin, setPin] = useState('')
   const [eta, setEta] = useState<{ ok: boolean; text: string } | null>(null)
+  // Show the floating buy bar only after the main Add to cart button scrolls out of view.
+  const buyRef = useRef<HTMLDivElement>(null)
+  const [mainBuyVisible, setMainBuyVisible] = useState(true)
+  useEffect(() => {
+    const el = buyRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(([e]) => setMainBuyVisible(e.isIntersecting))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [id])
 
   if (!p) return <NotFound />
 
@@ -58,7 +68,7 @@ export default function ProductPage() {
               <p className="hint">In a live version, restocking triggers the alert automatically, in the order people signed up.</p>
             </div>
           ) : (
-            <div className="stack">
+            <div className="stack" ref={buyRef}>
               {p.stock <= 10 && <p className="stock low">Only {p.stock} left in stock</p>}
               <button className="btn btn-primary btn-wide" onClick={() => add(p.id)}>Add to cart</button>
             </div>
@@ -106,8 +116,8 @@ export default function ProductPage() {
         </section>
       )}
 
-      {!out && (
-        <div className="sticky-buy" aria-hidden="false">
+      {!out && !mainBuyVisible && (
+        <div className="sticky-buy">
           <span><strong>{formatINR(p.price)}</strong> <small className="muted">{p.name}</small></span>
           <button className="btn btn-primary" onClick={() => add(p.id)}>Add to cart</button>
         </div>

@@ -236,11 +236,12 @@ fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 @media (max-width: 800px) {
   .product-layout { grid-template-columns: 1fr; gap: 16px; }
   .pdp-art { position: static; aspect-ratio: 4 / 3; }
-  .sticky-buy { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgb(0 0 0 / 8%); }
+  /* Floats above the bottom 56px, where hosting badges usually sit. */
+  .sticky-buy { display: flex; position: fixed; left: 8px; right: 8px; bottom: 60px; z-index: 40; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px 10px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 6px 24px rgb(0 0 0 / 14%); }
   .sticky-buy span { display: flex; flex-direction: column; min-width: 0; }
   .sticky-buy small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   body:has(.sticky-buy) .assistant { bottom: 80px; }
-  body:has(.sticky-buy) .site-footer { padding-bottom: 90px; }
+  body:has(.sticky-buy) .site-footer { padding-bottom: 150px; }
 }
 
 /* Gift finder */
@@ -350,7 +351,8 @@ fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 .steps-list { padding-left: 20px; }
 
 /* Assistant */
-.assistant { position: fixed; right: 16px; bottom: 16px; z-index: 45; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+/* Bottom-left, so it never sits under the host's bottom-right badge. */
+.assistant { position: fixed; left: 16px; bottom: 16px; z-index: 45; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .assistant-fab { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 18px; border-radius: 999px; border: 0; background: var(--navy); color: #fff; font: inherit; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgb(31 42 107 / 35%); }
 .assistant-fab span:first-child { font-size: 1.2rem; }
 .assistant-panel { width: min(380px, calc(100vw - 32px)); max-height: min(560px, calc(100dvh - 180px)); display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 12px 40px rgb(20 20 40 / 20%); overflow: hidden; }
@@ -375,13 +377,13 @@ fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 @media (max-width: 600px) {
   .help-btn { display: inline-grid; }
   .assistant-fab { display: none; }
-  .assistant { left: 8px; right: 8px; bottom: 8px; align-items: stretch; }
-  body:has(.sticky-buy) .assistant { bottom: 76px; }
+  .assistant { left: 8px; right: 8px; bottom: 64px; align-items: stretch; }
+  body:has(.sticky-buy) .assistant { bottom: 136px; }
   .assistant-panel { width: 100%; max-height: calc(100dvh - 140px); }
 }
 
 /* Toast */
-.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #24262f; color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 600; z-index: 60; pointer-events: none; max-width: calc(100vw - 32px); }
+.toast { position: fixed; left: 50%; bottom: 72px; transform: translateX(-50%); background: #24262f; color: #fff; padding: 10px 16px; border-radius: 12px; font-weight: 600; z-index: 60; pointer-events: none; max-width: calc(100vw - 32px); }
 .toast:empty { display: none; }
 
 /* Footer */
