@@ -55,7 +55,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="container header-row">
           <Link to="/" className="brand" aria-label={`${COMPANY} concept home`}>
             <span className="brand-mark" aria-hidden="true">✦</span>
-            <span className="brand-text">{COMPANY}<small>redesign concept</small></span>
+            <span className="brand-text">{COMPANY}<small>support and shopping ideas</small></span>
           </Link>
           <nav aria-label="Main" className={`main-nav ${menuOpen ? 'open' : ''}`} id="main-nav">
             <ul>
@@ -104,7 +104,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           <div>
             <p className="footer-title">Credits</p>
-            <p>Product visuals are emoji and CSS shapes, not photos. Product names, prices, reviews and orders are invented placeholders.</p>
+            <p>Product visuals are original SVG drawings, not photos. Product names, prices, reviews and orders are invented placeholders.</p>
           </div>
         </div>
       </footer>

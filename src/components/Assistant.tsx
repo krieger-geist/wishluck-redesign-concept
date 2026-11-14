@@ -25,6 +25,12 @@ export default function Assistant() {
     window.addEventListener('toggle-assistant', onOpen)
     return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('toggle-assistant', onOpen) }
   }, [])
+  // Lets other parts of the page open the assistant with a question already asked (used by "Start here").
+  useEffect(() => {
+    const onAsk = (e: Event) => { setOpen(true); askRef.current((e as CustomEvent<string>).detail) }
+    window.addEventListener('assistant-ask', onAsk)
+    return () => window.removeEventListener('assistant-ask', onAsk)
+  }, [])
 
   function ask(text: string) {
     const clean = text.trim()
@@ -61,6 +67,9 @@ export default function Assistant() {
     setMsgs((m) => [...m, ...next])
     setInput('')
   }
+
+  const askRef = useRef(ask)
+  useEffect(() => { askRef.current = ask })
 
   const lastQuestion = [...msgs].reverse().find((m) => m.from === 'me')?.text ?? ''
 

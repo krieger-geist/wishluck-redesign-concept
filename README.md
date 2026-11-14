@@ -1,4 +1,4 @@
-# WishLuck redesign concept (unofficial)
+# WishLuck support and shopping ideas (unofficial concept)
 
 An unofficial, non-commercial redesign concept for an online store selling screen-free learning toys and books for children.
 I made it as a portfolio piece to show how the shopping experience could be easier for parents and how routine
@@ -14,14 +14,14 @@ support and order work could be automated so the team spends less time on repeti
 
 | Page | What it shows |
 | --- | --- |
-| Home | Clear value proposition, search that understands "3 years under 800", all six age bands, occasion gifting |
+| Home | A "Start here" box with the three strongest demos, a clear value proposition, search that understands "3 years under 800", all six age bands, occasion gifting |
 | Shop | Filters for age, skill, occasion, budget and type; filters live in the URL so links can be shared |
 | Product | One clear price with the prepaid saving explained, PIN code delivery estimate, "Notify me" for sold-out items, automatic "goes well with" suggestions, sticky add-to-cart on phones |
 | Gift finder | Four taps (age, occasion, budget, interest) to a ranked shortlist with reasons, plus a gift note |
 | Help and tracking | Order tracker with timeline and example WhatsApp update, a replacement wizard that checks the 7-day window and approves clear cases, bulk enquiry routing, searchable FAQ |
 | Help assistant | On every page: answers common questions from the FAQ, and drafts a ticket with context when it cannot help |
 | Automation dashboard | A simulated event feed run through "when, then" rules you can switch on and off, auto-tagged support inbox, stock watch, COD confirmations, review tone sorting |
-| What I changed and why | Each issue I noticed on the current public site, the change, and the expected effect |
+| What I changed and why | A top 3 summary, then each gap on the current site (strongest first), the change, and the expected effect; minor notes folded into one section |
 | About | The disclaimer in full, what is stored, credits |
 
 Demo data to try: order `DEMO1001` with phone digits `1234` (in transit), `DEMO1002` / `5678` (delivered 2 days ago,
@@ -29,7 +29,7 @@ replacement allowed), `DEMO1003` / `9012` (outside the 7-day window).
 
 ## Tech
 
-- Vite, React 19, TypeScript, React Router. No backend, no external requests, no web fonts, no images.
+- Vite, React 19, TypeScript, React Router. No backend, no external requests, no web fonts, no photos (inline SVG drawings only).
 - Static build, about 100 KB of JavaScript gzipped.
 - Accessibility: skip link, visible focus outline, labelled controls, one H1 per page, colour pairs chosen for WCAG AA
   contrast, focus moves to the new page on navigation, no auto-moving content, `prefers-reduced-motion` respected.
@@ -76,5 +76,5 @@ since. No statistics are invented: expected effects are described as a direction
 
 ## Credits
 
-- Product visuals: system emoji and CSS shapes.
+- Product visuals: original SVG drawings made for this concept.
 - React, React Router, Vite and TypeScript are MIT licensed.

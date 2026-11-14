@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import ProductArt from '../components/ProductArt'
 import { Link, useNavigate } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import { AGE_BANDS, OCCASIONS, products } from '../data/products'
@@ -36,8 +37,45 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-art" aria-hidden="true">
-            <span className="blob b1">📖</span><span className="blob b2">🧲</span><span className="blob b3">🌈</span><span className="blob b4">🚀</span>
+            <span className="blob b1"><ProductArt id="talking-word-book" className="art-svg" /></span><span className="blob b2"><ProductArt id="magnetic-tiles" className="art-svg" /></span><span className="blob b3"><ProductArt id="stacking-rainbow" className="art-svg" /></span><span className="blob b4"><ProductArt id="pop-up-space" className="art-svg" /></span>
           </div>
+        </div>
+      </section>
+
+
+      <section className="container section start-here" aria-labelledby="start-h">
+        <div className="start-box">
+          <div className="start-intro">
+            <p className="eyebrow">Start here</p>
+            <h2 id="start-h">Three things to try in two minutes</h2>
+            <p className="muted">Each one is a gap on the current site that this concept closes with automation. All demo data, nothing is sent.</p>
+          </div>
+          <ol className="start-list">
+            <li>
+              <span className="start-num" aria-hidden="true">1</span>
+              <div>
+                <h3>Request a replacement without emailing</h3>
+                <p>Checks the 7-day window and approves clear cases instantly.</p>
+                <Link className="btn btn-primary" to="/help#replace">Try a replacement</Link>
+              </div>
+            </li>
+            <li>
+              <span className="start-num" aria-hidden="true">2</span>
+              <div>
+                <h3>Track an order inside the assistant</h3>
+                <p>Order number and phone digits, no courier AWB number needed.</p>
+                <button className="btn btn-primary" onClick={() => window.dispatchEvent(new CustomEvent('assistant-ask', { detail: 'DEMO1001 1234' }))}>Ask the assistant</button>
+              </div>
+            </li>
+            <li>
+              <span className="start-num" aria-hidden="true">3</span>
+              <div>
+                <h3>Watch routine work run by itself</h3>
+                <p>Store events flow through simple rules; only real exceptions reach a person.</p>
+                <Link className="btn btn-primary" to="/dashboard">Open the dashboard</Link>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 

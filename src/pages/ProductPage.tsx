@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
+import ProductArt from '../components/ProductArt'
 import { Link, useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import { ageLabel, discountPct, findProduct, formatINR, products } from '../data/products'
@@ -47,7 +48,7 @@ export default function ProductPage() {
         <ol><li><Link to="/">Home</Link></li><li><Link to="/shop">Shop</Link></li><li aria-current="page">{p.name}</li></ol>
       </nav>
       <section className="container product-layout">
-        <div className="pdp-art" style={{ background: p.tint }} aria-hidden="true"><span>{p.emoji}</span></div>
+        <div className="pdp-art" style={{ background: p.tint }} aria-hidden="true"><ProductArt id={p.id} className="art-svg" /></div>
         <div className="pdp-info">
           <p className="meta"><span className="age-tag">{ageLabel(p)}</span> · {p.type} · {p.category}</p>
           <h1 className="pdp-title">{p.name}</h1>

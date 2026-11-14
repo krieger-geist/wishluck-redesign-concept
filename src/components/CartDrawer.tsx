@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import ProductArt from './ProductArt'
 import { findProduct, formatINR } from '../data/products'
 import { useStore } from '../store'
 
@@ -50,7 +51,7 @@ export default function CartDrawer({ open, onClose }: { open: boolean; onClose: 
             <ul className="cart-lines">
               {lines.map((l) => (
                 <li key={l.id}>
-                  <span className="cart-emoji" aria-hidden="true" style={{ background: l.p.tint }}>{l.p.emoji}</span>
+                  <span className="cart-emoji" aria-hidden="true" style={{ background: l.p.tint }}><ProductArt id={l.p.id} className="art-svg" /></span>
                   <span className="cart-name">{l.p.name}<small>{formatINR(l.p.price)} each</small></span>
                   <span className="qty">
                     <button className="qty-btn" onClick={() => setQty(l.id, l.qty - 1)} aria-label={`Remove one ${l.p.name}`}>−</button>

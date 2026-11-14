@@ -95,6 +95,22 @@ const CHANGES: Change[] = [
   },
 ]
 
+// Strongest ideas first. Smaller observations are folded into "Other notes" so they do not read as a list of complaints.
+const ORDER = ['Replacements', 'Support inside the assistant', 'Order tracking', 'Sold-out products', 'Finding the right toy', 'Gifting', 'Cash on delivery', 'Mobile layout', 'Accessibility']
+const MAIN = ORDER.map((a) => CHANGES.find((c) => c.area === a)!).filter(Boolean)
+
+const TOP3: { title: string; text: string; to: string; ask?: string }[] = [
+  { title: 'Replacements without email', text: 'A 7-day replacement request that checks eligibility and approves clear cases on its own.', to: '/help#replace' },
+  { title: 'An assistant that also does support', text: 'Track by order number and start replacements in chat, with a ready ticket when a person is needed.', to: '', ask: 'DEMO1001 1234' },
+  { title: 'Alerts instead of dead ends', text: '"Notify me" on sold-out toys, plus rules that handle routine order updates automatically.', to: '/dashboard' },
+]
+
+const MINOR = [
+  'Pricing: the cart already explains savings well; the product page could show one price with the prepaid saving in a single line.',
+  'Speed: the home page loads many third-party scripts (about 470 requests in my test). Loading non-essential apps later would help on slow mobile networks.',
+  'Consistency: the happy-parents count and one product page title differ between pages; one shared source for each claim keeps them aligned.',
+]
+
 const TYPE_CLASS: Record<Change['effectType'], string> = { Reach: 'pill-soft', Conversion: 'pill-ok', Operations: 'pill-blue', Trust: 'pill-warn' }
 
 export default function Changes() {
@@ -103,10 +119,28 @@ export default function Changes() {
     <section className="container section">
       <h1 className="page-title">What I changed and why</h1>
       <p className="lead narrow-text">
-        I looked through the public website on 14 November 2026 on a laptop and a phone-sized screen, as a parent would. Below is what I noticed,
-        what this concept does differently, and the effect I would expect. These are honest observations from the public pages, the cart and the start of checkout (I did not place an order), not an audit by the team,
-        and some may already be known or planned. I have not invented any statistics: effects are described as the expected direction only.
+        I went through the public website on 14 November 2026 as a parent would, on a laptop and a phone, including the cart and the start of checkout
+        (no order placed). These are honest observations, not an internal audit, and some may already be planned. No statistics are invented.
       </p>
+
+      <section aria-labelledby="top3-h" className="top3">
+        <h2 id="top3-h" className="h3">If you only read one thing: the top 3 ideas</h2>
+        <ol className="top3-list">
+          {TOP3.map((t, i) => (
+            <li key={t.title} className="card">
+              <span className="start-num" aria-hidden="true">{i + 1}</span>
+              <div>
+                <h3>{t.title}</h3>
+                <p>{t.text}</p>
+                {t.ask
+                  ? <button className="link-btn" onClick={() => window.dispatchEvent(new CustomEvent('assistant-ask', { detail: t.ask }))}>Try it in the assistant →</button>
+                  : <Link to={t.to}>See it →</Link>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <p className="muted narrow-text">What already works well and is kept: shopping by age, toys or books as two clear paths, detailed product pages, an AI shopping assistant, AWB tracking, a cart with tiered discounts and combo upsells, a fast GoKwik checkout with coupons, the 7-day replacement promise, and occasion-based gifting. The ideas below build on these rather than replace them.</p>
 
       <ul className="legend" aria-label="Effect types">
@@ -117,7 +151,7 @@ export default function Changes() {
       </ul>
 
       <ol className="changes">
-        {CHANGES.map((c) => (
+        {MAIN.map((c) => (
           <li key={c.area} className="card change-card">
             <div className="change-head">
               <h2 className="h3">{c.area}</h2>
@@ -132,6 +166,11 @@ export default function Changes() {
           </li>
         ))}
       </ol>
+
+      <section className="card narrow-text minor-notes" aria-labelledby="minor-h">
+        <h2 id="minor-h" className="h3">Other notes</h2>
+        <ul>{MINOR.map((m) => <li key={m}>{m}</li>)}</ul>
+      </section>
 
       <div className="card narrow-text">
         <h2 className="h3">How the team could use parts of this</h2>

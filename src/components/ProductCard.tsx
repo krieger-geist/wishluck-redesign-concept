@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import ProductArt from './ProductArt'
 import { ageLabel, discountPct, formatINR, type Product } from '../data/products'
 import { useStore } from '../store'
 
@@ -9,7 +10,7 @@ export default function ProductCard({ p, reason }: { p: Product; reason?: string
   return (
     <article className="card product-card">
       <Link to={`/product/${p.id}`} className="product-art" style={{ background: p.tint }} aria-hidden="true" tabIndex={-1}>
-        <span>{p.emoji}</span>
+        <ProductArt id={p.id} className="art-svg" />
       </Link>
       <div className="product-body">
         <p className="meta"><span className="age-tag">{ageLabel(p)}</span> · {p.type}</p>

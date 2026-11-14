@@ -23,7 +23,7 @@ export default function About() {
       <p>The demo cart and "notify me" choices are saved only in your own browser's local storage so they survive a refresh. Clearing site data removes them.</p>
       <h2 className="h3">Credits</h2>
       <ul>
-        <li>Product visuals: system emoji and CSS shapes, no stock photos.</li>
+        <li>Product visuals: original SVG drawings made for this concept, no stock photos.</li>
         <li>Built with React, React Router, TypeScript and Vite (all MIT licensed).</li>
         <li>Font: your device's system font, so nothing is downloaded.</li>
       </ul>
